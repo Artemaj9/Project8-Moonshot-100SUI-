@@ -7,15 +7,40 @@
 
 import SwiftUI
 
+struct CustomText: View {
+    let text: String
+    
+    var body: some View {
+        Text(text)
+    }
+    init(_ text: String) {
+        print("Creating a new CustomText")
+        self.text = text
+    }
+}
+
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+       
+        NavigationStack {
+            VStack {
+            GeometryReader { geo in
+                Image("Zvezdopad")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: geo.size.width)
+            }
+            .padding(.vertical)
+                List (0..<100) { row in
+                    NavigationLink {
+                        NavigationViewBootcamp()
+                    } label : {
+                        CustomText("Item \(row)")
+                            .font(.title)
+                    }
+                }
+            }
         }
-        .padding()
     }
 }
 
